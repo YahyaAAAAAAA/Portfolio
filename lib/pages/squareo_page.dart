@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:video_player/video_player.dart';
+import 'package:yahya_porfolio/components/main_card.dart';
 import 'package:yahya_porfolio/pages/doi_page.dart';
 import 'package:yahya_porfolio/utils/custom_colors.dart';
 
@@ -12,78 +13,62 @@ class SquareoPage extends StatefulWidget {
   State<SquareoPage> createState() => _SquareoPageState();
 }
 
-class _SquareoPageState extends State<SquareoPage>
-    with TickerProviderStateMixin {
+class _SquareoPageState extends State<SquareoPage> {
+  late VideoPlayerController _controller;
   CustomColors c = CustomColors();
-
+  double pad = 50;
   @override
   void initState() {
+    _controller = VideoPlayerController.asset('assets/videos/Squareo.mp4')
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) => setState(
+        () {
+          pad = 90;
+          // _controller.videoPlayerOptions!.webOptions?.controls.enabled = true;
+        },
+      ),
+    );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Listener(
       onPointerSignal: (event) => scrollDown(event, context),
+      onPointerMove: (event) => swipeDown(event, context),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: AnimatedMeshGradient(
-          colors: [
+        body: MainCard(
+          pad: pad,
+          controller: _controller,
+          mainTitle:
+              'An engaging mobile puzzle game where your objective is to restore a grid of squares to its original state',
+          meshPoints: [
             c.squareoMesh_1,
             c.squareoMesh_2,
             c.squareoMesh_1,
             c.squareoMesh_2,
           ],
-          options: AnimatedMeshGradientOptions(
-            speed: 7,
-          ),
-          //the padded container
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.transparent,
-            padding: const EdgeInsets.all(90),
-            //image container
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.transparent,
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/squareo_bg.png'),
-                  fit: BoxFit.cover,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 20,
-                    offset: const Offset(2, 2),
-                  ),
-                ],
-              ),
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      'An engaging mobile puzzle game where your objective is to restore a grid of squares to its original state',
-                      style: TextStyle(
-                        color: c.squareoText,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Abel',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          bgImage: 'assets/images/squareo_bg.png',
+          animatedText: c.squareoTextAnimated,
+          iconColor: c.squareoText,
+          textAndIconBg: Colors.black.withOpacity(0.5),
+          contactsBg: c.squareoMesh_1,
+          contactsText: c.doiMesh_1,
+          contactsCard: c.squareoText,
+          videoBg: const Color(0xFFE9DACF),
+          videoIconBg: c.doiMesh_1,
+          link: 'https://squareoweb.github.io/',
         ),
         bottomSheet: IconButton(
           onPressed: () {
@@ -121,6 +106,18 @@ class _SquareoPageState extends State<SquareoPage>
           ),
         );
       }
+    }
+  }
+
+  void swipeDown(PointerMoveEvent event, BuildContext context) {
+    if (event.delta.dy < 0) {
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: const DrawOverItPage(),
+        ),
+      );
     }
   }
 }
