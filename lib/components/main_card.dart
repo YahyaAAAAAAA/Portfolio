@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:Portfolio/utils/custom_icons_icons.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -163,8 +164,8 @@ class MainCard extends StatelessWidget {
                                     child: FloatingActionButton(
                                       backgroundColor: videoBg,
                                       child: Icon(
-                                        Icons.play_arrow, //TODO ADD ICON
-                                        size: 40,
+                                        CustomIcons.play_pause, //TODO ADD ICON
+                                        size: 30,
                                         color: videoIconBg,
                                       ),
                                       onPressed: () {
@@ -207,39 +208,5 @@ class MainCard extends StatelessWidget {
     if (!await launchUrl(Uri.parse(link))) {
       throw Exception('Could not launch $link');
     }
-  }
-
-  //method to show Contact Me dialog
-  void showConatctDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: contactsBg,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ContactUs(
-                logo: const AssetImage('assets/images/pfp12313.PNG'),
-                email: 'yahya.amarneh73@gmail.com',
-                companyName: 'Yahya',
-                phoneNumber: null,
-                dividerThickness: 2,
-                githubUserName: 'YahyaAAAAAAA/Squareo/',
-                linkedinURL:
-                    'https://www.linkedin.com/in/yahya-amarneh-315528229/',
-                tagLine: 'Software Engineer',
-                twitterHandle: null,
-                textColor: contactsText,
-                cardColor: contactsCard,
-                companyColor: contactsText,
-                taglineColor: contactsText,
-                dividerColor: contactsText,
-              ),
-            ),
-          ],
-        );
-      },
-    );
   }
 }

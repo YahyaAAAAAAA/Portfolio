@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yahya_porfolio/pages/doi_page.dart';
-import 'package:yahya_porfolio/pages/squareo_page.dart';
+import 'package:Portfolio/pages/doi_page.dart';
+import 'package:Portfolio/pages/home.dart';
+import 'package:Portfolio/pages/squareo_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
         ),
       ),
-      home: const DrawOverItPage(),
+      home: const Home(),
     );
   }
 }

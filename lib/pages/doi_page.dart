@@ -1,10 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:video_player/video_player.dart';
-import 'package:yahya_porfolio/components/main_card.dart';
-import 'package:yahya_porfolio/pages/squareo_page.dart';
-import 'package:yahya_porfolio/utils/custom_colors.dart';
+import 'package:Portfolio/components/main_card.dart';
+import 'package:Portfolio/pages/squareo_page.dart';
+import 'package:Portfolio/utils/custom_colors.dart';
+import 'package:Portfolio/utils/movement.dart';
 
 class DrawOverItPage extends StatefulWidget {
   const DrawOverItPage({super.key});
@@ -16,6 +15,7 @@ class DrawOverItPage extends StatefulWidget {
 class _DrawOverItPageState extends State<DrawOverItPage> {
   late VideoPlayerController _controller;
   CustomColors c = CustomColors();
+  Movement movement = Movement();
   double pad = 50;
 
   @override
@@ -46,8 +46,10 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
   @override
   Widget build(BuildContext context) {
     return Listener(
-      onPointerSignal: (event) => scrollUp(event, context),
-      onPointerMove: (event) => swipeUp(event, context),
+      onPointerSignal: (event) =>
+          movement.scrollUp(event, context, const SquareoPage()),
+      onPointerMove: (event) =>
+          movement.swipeUp(event, context, const SquareoPage()),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
@@ -56,11 +58,12 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
           backgroundColor: Colors.transparent,
           title: IconButton(
             onPressed: () {
-              goUp(context);
+              movement.goUp(context, const SquareoPage());
             },
             icon: const Icon(
               Icons.keyboard_arrow_up,
               color: Colors.white,
+              size: 30,
             ),
           ),
         ),
@@ -87,42 +90,5 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
         ),
       ),
     );
-  }
-
-  void goUp(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      PageTransition(
-        type: PageTransitionType.fade,
-        child: const SquareoPage(),
-      ),
-    );
-  }
-
-  void scrollUp(PointerSignalEvent event, BuildContext context) {
-    if (event is PointerScrollEvent) {
-      double yScroll = event.scrollDelta.dy;
-      if (yScroll < 0) {
-        Navigator.pushReplacement(
-          context,
-          PageTransition(
-            type: PageTransitionType.fade,
-            child: const SquareoPage(),
-          ),
-        );
-      }
-    }
-  }
-
-  void swipeUp(PointerMoveEvent event, BuildContext context) {
-    if (event.delta.dy > 0) {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-          type: PageTransitionType.fade,
-          child: const SquareoPage(),
-        ),
-      );
-    }
   }
 }

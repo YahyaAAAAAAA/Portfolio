@@ -1,10 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:video_player/video_player.dart';
-import 'package:yahya_porfolio/components/main_card.dart';
-import 'package:yahya_porfolio/pages/doi_page.dart';
-import 'package:yahya_porfolio/utils/custom_colors.dart';
+import 'package:Portfolio/components/main_card.dart';
+import 'package:Portfolio/pages/doi_page.dart';
+import 'package:Portfolio/pages/home.dart';
+import 'package:Portfolio/utils/custom_colors.dart';
+import 'package:Portfolio/utils/movement.dart';
 
 class SquareoPage extends StatefulWidget {
   const SquareoPage({super.key});
@@ -16,6 +16,7 @@ class SquareoPage extends StatefulWidget {
 class _SquareoPageState extends State<SquareoPage> {
   late VideoPlayerController _controller;
   CustomColors c = CustomColors();
+  Movement movement = Movement();
   double pad = 50;
   @override
   void initState() {
@@ -44,10 +45,31 @@ class _SquareoPageState extends State<SquareoPage> {
   @override
   Widget build(BuildContext context) {
     return Listener(
-      onPointerSignal: (event) => scrollDown(event, context),
-      onPointerMove: (event) => swipeDown(event, context),
+      onPointerSignal: (event) {
+        movement.scrollDown(event, context, const DrawOverItPage());
+        movement.scrollUp(event, context, const Home());
+      },
+      onPointerMove: (event) {
+        movement.swipeDown(event, context, const DrawOverItPage());
+        movement.swipeUp(event, context, const Home());
+      },
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          title: IconButton(
+            onPressed: () {
+              movement.goUp(context, const Home());
+            },
+            icon: const Icon(
+              Icons.keyboard_arrow_up,
+              color: Colors.black,
+              size: 30,
+            ),
+          ),
+        ),
         body: MainCard(
           pad: pad,
           controller: _controller,
@@ -68,56 +90,20 @@ class _SquareoPageState extends State<SquareoPage> {
           contactsCard: c.squareoText,
           videoBg: const Color(0xFFE9DACF),
           videoIconBg: c.doiMesh_1,
-          link: 'https://squareoweb.github.io/',
+          link: 'https://github.com/YahyaAmarneh/Squareo',
         ),
         bottomSheet: IconButton(
           onPressed: () {
-            goUp(context);
+            movement.goDown(context, const DrawOverItPage());
           },
           icon: const Icon(
             Icons.keyboard_arrow_down,
             color: Colors.black,
+            size: 30,
           ),
         ),
         extendBody: true,
       ),
     );
-  }
-
-  void goUp(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      PageTransition(
-        type: PageTransitionType.fade,
-        child: const DrawOverItPage(),
-      ),
-    );
-  }
-
-  void scrollDown(PointerSignalEvent event, BuildContext context) {
-    if (event is PointerScrollEvent) {
-      double yScroll = event.scrollDelta.dy;
-      if (yScroll > 0) {
-        Navigator.pushReplacement(
-          context,
-          PageTransition(
-            type: PageTransitionType.fade,
-            child: const DrawOverItPage(),
-          ),
-        );
-      }
-    }
-  }
-
-  void swipeDown(PointerMoveEvent event, BuildContext context) {
-    if (event.delta.dy < 0) {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-          type: PageTransitionType.fade,
-          child: const DrawOverItPage(),
-        ),
-      );
-    }
   }
 }

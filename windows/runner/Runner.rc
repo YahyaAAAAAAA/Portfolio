@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "yahya_porfolio" "\0"
+            VALUE "FileDescription", "Portfolio" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "yahya_porfolio" "\0"
+            VALUE "InternalName", "Portfolio" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "yahya_porfolio.exe" "\0"
-            VALUE "ProductName", "yahya_porfolio" "\0"
+            VALUE "OriginalFilename", "Portfolio.exe" "\0"
+            VALUE "ProductName", "Portfolio" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
