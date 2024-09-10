@@ -16,7 +16,7 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
   late VideoPlayerController _controller;
   CustomColors c = CustomColors();
   Movement movement = Movement();
-  double pad = 50;
+  double contPadding = 50;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
       (timeStamp) {
         setState(
           () {
-            pad = 90;
+            contPadding = 90;
           },
         );
       },
@@ -68,7 +68,7 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
           ),
         ),
         body: MainCard(
-          pad: pad,
+          contPadding: contPadding,
           controller: _controller,
           mainTitle: 'A Windows application that make you draw over any window',
           meshPoints: [

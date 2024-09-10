@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Portfolio/pages/doi_page.dart';
 import 'package:Portfolio/pages/home.dart';
-import 'package:Portfolio/pages/squareo_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

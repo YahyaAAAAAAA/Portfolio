@@ -17,7 +17,7 @@ class _SquareoPageState extends State<SquareoPage> {
   late VideoPlayerController _controller;
   CustomColors c = CustomColors();
   Movement movement = Movement();
-  double pad = 50;
+  double contPadding = 50;
   @override
   void initState() {
     _controller = VideoPlayerController.asset('assets/videos/Squareo.mp4')
@@ -26,12 +26,11 @@ class _SquareoPageState extends State<SquareoPage> {
         setState(() {});
       });
     WidgetsBinding.instance.addPostFrameCallback(
-      (timeStamp) => setState(
-        () {
-          pad = 90;
-          // _controller.videoPlayerOptions!.webOptions?.controls.enabled = true;
-        },
-      ),
+      (timeStamp) {
+        setState(() {
+          contPadding = 90;
+        });
+      },
     );
     super.initState();
   }
@@ -71,7 +70,7 @@ class _SquareoPageState extends State<SquareoPage> {
           ),
         ),
         body: MainCard(
-          pad: pad,
+          contPadding: contPadding,
           controller: _controller,
           mainTitle:
               'An engaging mobile puzzle game where your objective is to restore a grid of squares to its original state',

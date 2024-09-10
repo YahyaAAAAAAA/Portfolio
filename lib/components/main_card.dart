@@ -1,5 +1,4 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:contactus/contactus.dart';
 import 'package:flutter/material.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +8,7 @@ import 'package:Portfolio/utils/custom_icons_icons.dart';
 class MainCard extends StatelessWidget {
   const MainCard({
     super.key,
-    required this.pad,
+    required this.contPadding,
     required this.mainTitle,
     required this.meshPoints,
     required this.bgImage,
@@ -25,7 +24,7 @@ class MainCard extends StatelessWidget {
     required this.videoIconBg,
   }) : _controller = controller;
 
-  final double pad;
+  final double contPadding;
   final VideoPlayerController _controller;
   final String mainTitle;
   final String bgImage;
@@ -53,7 +52,7 @@ class MainCard extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         duration: const Duration(milliseconds: 500),
         color: Colors.transparent,
-        padding: EdgeInsets.all(pad),
+        padding: EdgeInsets.all(contPadding),
         //image container
         child: Container(
           padding: const EdgeInsets.all(10),
