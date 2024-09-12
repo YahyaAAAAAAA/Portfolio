@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mesh_gradient/mesh_gradient.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:flutter/foundation.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -40,12 +41,17 @@ class MainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return TargetPlatform.android == defaultTargetPlatform
+        ? phoneBuild(context)
+        : desktopBuild(context);
+  }
+
+  Widget desktopBuild(BuildContext context) {
     return AnimatedMeshGradient(
       colors: meshPoints,
       options: AnimatedMeshGradientOptions(
         speed: 7,
       ),
-      //the padded container
       child: AnimatedContainer(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -123,20 +129,21 @@ class MainCard extends StatelessWidget {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                                backgroundColor: videoBg,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(32.0),
-                                  ),
+                              backgroundColor: videoBg,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(32.0),
                                 ),
-                                content: SizedBox(
-                                  width: 500,
-                                  height: 500,
-                                  child: YoutubePlayer(
-                                    controller: controller,
-                                    // aspectRatio: 16 / 9,
-                                  ),
-                                ));
+                              ),
+                              content: SizedBox(
+                                width: 500,
+                                height: 500,
+                                child: YoutubePlayer(
+                                  controller: controller,
+                                  // aspectRatio: 16 / 9,
+                                ),
+                              ),
+                            );
                           },
                         );
                       },
@@ -156,6 +163,123 @@ class MainCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget phoneBuild(BuildContext context) {
+    return AnimatedContainer(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      duration: const Duration(milliseconds: 500),
+      // color: Colors.transparent,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            meshPoints[0],
+            meshPoints[1],
+            meshPoints[0],
+            meshPoints[1],
+          ],
+        ),
+      ),
+      padding: EdgeInsets.all(contPadding),
+      //image container
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.transparent,
+          image: DecorationImage(
+            image: AssetImage(bgImage),
+            fit: BoxFit.cover,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 20,
+              offset: const Offset(2, 2),
+            ),
+          ],
+        ),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          children: [
+            Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: textAndIconBg,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  mainTitle,
+                  style: TextStyle(
+                    color: animatedText[0],
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Abel',
+                  ),
+                )),
+            SizedBox(height: MediaQuery.of(context).size.height - 200),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () => _launchUrl(link),
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(
+                        textAndIconBg,
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.link_outlined,
+                      size: 35,
+                      color: iconColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: videoBg,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(32.0),
+                              ),
+                            ),
+                            content: SizedBox(
+                              width: 500,
+                              height: 500,
+                              child: YoutubePlayer(
+                                controller: controller,
+                                // aspectRatio: 16 / 9,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(
+                        textAndIconBg,
+                      ),
+                    ),
+                    icon: Icon(
+                      Icons.play_arrow_rounded,
+                      size: 35,
+                      color: iconColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

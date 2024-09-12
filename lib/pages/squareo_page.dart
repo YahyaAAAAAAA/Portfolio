@@ -17,7 +17,7 @@ class _SquareoPageState extends State<SquareoPage> {
   CustomColors c = CustomColors();
   Movement movement = Movement();
   double contPadding = 50;
-  // If the requirement is just to play a single video.
+
   final controller = YoutubePlayerController.fromVideoId(
     videoId: '0REj6jxwHZg',
     autoPlay: true,
