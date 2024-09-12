@@ -97,7 +97,7 @@ class MainCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height - 270),
+              SizedBox(height: MediaQuery.of(context).size.height - 200),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
