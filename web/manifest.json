@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "portfolio",
     "short_name": "portfolio",
+=======
+    "name": "Portfolio",
+    "short_name": "Portfolio",
+>>>>>>> 3f1d2e66a9c7071c33863fb41977346e9162ad95
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -59,7 +59,8 @@ class _SquareoPageState extends State<SquareoPage> {
           ),
         ),
         body: MainCard(
-          pad: 70,
+          contPadding: contPadding,
+          controller: controller,
           mainTitle:
               'An engaging mobile puzzle game where your objective is to restore a grid of squares to its original state',
           meshPoints: [
@@ -77,8 +78,7 @@ class _SquareoPageState extends State<SquareoPage> {
           contactsCard: c.squareoText,
           videoBg: const Color(0xFFE9DACF),
           videoIconBg: c.doiMesh_1,
-          githublink: 'https://github.com/YahyaAmarneh/Squareo',
-          controller: controller,
+          link: 'https://github.com/YahyaAmarneh/Squareo',
         ),
         bottomSheet: IconButton(
           onPressed: () {

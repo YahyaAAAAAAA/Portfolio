@@ -23,11 +23,6 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
   );
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     controller.close();
     super.dispose();
@@ -58,7 +53,7 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
           ),
         ),
         body: MainCard(
-          pad: 70,
+          contPadding: contPadding,
           mainTitle: 'A Windows application that make you draw over any window',
           meshPoints: [
             c.doiMesh_1,
@@ -75,7 +70,7 @@ class _DrawOverItPageState extends State<DrawOverItPage> {
           contactsCard: c.doiText,
           videoBg: c.doiMesh_1,
           videoIconBg: c.doiText,
-          githublink: 'https://github.com/YahyaAAAAAAA/DrawOverIt/',
+          link: 'https://github.com/YahyaAAAAAAA/DrawOverIt/',
           controller: controller,
         ),
       ),

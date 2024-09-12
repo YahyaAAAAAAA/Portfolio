@@ -17,13 +17,13 @@ class MainCard extends StatelessWidget {
     required this.contactsText,
     required this.contactsCard,
     required this.videoBg,
-    required this.githublink,
+    required this.link,
     required this.videoIconBg,
+    required this.contPadding,
     required this.controller,
-    required this.pad,
   });
 
-  final double pad;
+  final double contPadding;
   final String mainTitle;
   final String bgImage;
   final List<Color> meshPoints;
@@ -35,7 +35,7 @@ class MainCard extends StatelessWidget {
   final Color contactsCard;
   final Color videoBg;
   final Color videoIconBg;
-  final String githublink;
+  final String link;
   final YoutubePlayerController controller;
 
   @override
@@ -51,7 +51,7 @@ class MainCard extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         duration: const Duration(milliseconds: 500),
         color: Colors.transparent,
-        padding: EdgeInsets.all(pad),
+        padding: EdgeInsets.all(contPadding),
         //image container
         child: Container(
           padding: const EdgeInsets.all(10),
@@ -105,7 +105,7 @@ class MainCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: () => _launchUrl(githublink),
+                      onPressed: () => _launchUrl(link),
                       style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(
                           textAndIconBg,
