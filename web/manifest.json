@@ -1,6 +1,6 @@
 {
-    "name": "yahya_porfolio",
-    "short_name": "yahya_porfolio",
+    "name": "portfolio",
+    "short_name": "portfolio",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
