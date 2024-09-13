@@ -41,7 +41,7 @@
 
 ###
 
-<p align="left">A portfolio website showcasing my work</p>
+<p align="left">A portfolio website showcasing my work.</p>
 
 
 <h2 align="left">Technologies Used</h2>
