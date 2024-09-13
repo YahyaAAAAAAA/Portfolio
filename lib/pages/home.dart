@@ -35,7 +35,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   ButtonStyle getButtonStyle() {
     return ButtonStyle(
-      // backgroundColor: WidgetStatePropertyAll(buttonsBg),
       overlayColor: WidgetStatePropertyAll(Colors.brown.withOpacity(0.7)),
       shape: WidgetStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -43,25 +42,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    //? Maybe ? idk
-    // img = 'assets/images/neon_bg.gif';
-    // WidgetsBinding.instance.addPostFrameCallback(
-    //   (timeStamp) {
-    //     Future.delayed(
-    //       const Duration(seconds: 1),
-    //       () {
-    //         setState(() {
-    //           img = 'assets/images/home_bg.png';
-    //         });
-    //       },
-    //     );
-    //   },
-    // );
   }
 
   @override

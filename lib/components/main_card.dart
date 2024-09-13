@@ -173,7 +173,6 @@ class MainCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       duration: const Duration(milliseconds: 500),
-      // color: Colors.transparent,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
