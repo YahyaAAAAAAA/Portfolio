@@ -72,7 +72,12 @@ class MainCard extends StatelessWidget {
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 blurRadius: 20,
-                offset: const Offset(2, 2),
+                offset: const Offset(4, 4),
+              ),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 20,
+                offset: const Offset(-4, -4),
               ),
             ],
           ),
