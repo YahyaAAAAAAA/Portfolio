@@ -117,7 +117,10 @@ class Movement {
                 email: 'yahya.amarneh73@gmail.com',
                 companyName: 'Yahya',
                 phoneNumber: null,
-                dividerThickness: 2,
+                dividerThickness: 0.3,
+                textFont: 'Abel',
+                companyFont: 'Abel',
+                taglineFont: 'Abel',
                 githubUserName: 'YahyaAAAAAAA/',
                 linkedinURL:
                     'https://www.linkedin.com/in/yahya-amarneh-315528229/',

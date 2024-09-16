@@ -12,20 +12,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   Movement movement = Movement();
-  Color buttonsBg = Colors.brown.shade900.withOpacity(0.5);
-  String img = 'assets/images/home_bg.png';
+  Color buttonsBg = Colors.grey.withOpacity(0.5);
+  Color bgColor = Colors.grey.shade300;
+  Color titleColor = Colors.grey.shade700;
 
-  TextStyle getTextStyle({Color color = Colors.white, double fontSize = 25}) {
+  TextStyle getTextStyle({Color color = Colors.black, double fontSize = 20}) {
     return TextStyle(
       color: color,
       fontSize: fontSize,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.normal,
       fontFamily: 'Abel',
     );
   }
 
   Icon getIconStyle(IconData icon,
-      {Color color = Colors.white, double size = 25}) {
+      {Color color = Colors.black, double size = 17}) {
     return Icon(
       icon,
       color: color,
@@ -35,7 +36,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   ButtonStyle getButtonStyle() {
     return ButtonStyle(
-      overlayColor: WidgetStatePropertyAll(Colors.brown.withOpacity(0.7)),
+      overlayColor: WidgetStatePropertyAll(buttonsBg),
       shape: WidgetStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -54,57 +55,36 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         extendBodyBehindAppBar: true,
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                img,
-              ),
-            ),
-          ),
-          alignment: Alignment.center,
-          padding: const EdgeInsets.only(bottom: 400),
-          child: Container(
-            padding: const EdgeInsets.all(9),
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                gradient: LinearGradient(colors: [
-                  const Color(0xFF826656).withOpacity(0.7),
-                  const Color(0xFF826656).withOpacity(0.7),
-                ])),
+        appBar: AppBar(
+          backgroundColor: bgColor,
+          centerTitle: true,
+          bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1),
+              child: Divider(
+                thickness: 0.3,
+                color: titleColor,
+                endIndent: MediaQuery.of(context).size.width -
+                    (MediaQuery.of(context).size.width / 1.2),
+                indent: MediaQuery.of(context).size.width -
+                    (MediaQuery.of(context).size.width / 1.2),
+              )),
+          title: Padding(
+            padding: const EdgeInsets.only(top: 10),
             child: Wrap(
-              alignment: WrapAlignment.center,
               children: [
-                TextButton.icon(
-                  onPressed: () =>
-                      movement.goDown(context, const SquareoPage()),
-                  label: Text(
-                    'My Work',
-                    style: getTextStyle(),
-                  ),
-                  icon: getIconStyle(CustomIcons.blueprint, size: 20),
-                  style: getButtonStyle(),
-                ),
-                // const SizedBox(width: 20, height: 70),
                 TextButton.icon(
                   onPressed: () {},
                   label: Text(
                     'Resume',
                     style: getTextStyle(),
                   ),
-                  icon: getIconStyle(CustomIcons.cv, size: 20),
+                  icon: getIconStyle(CustomIcons.cv),
                   style: getButtonStyle(),
                 ),
                 // const SizedBox(width: 20, height: 70),
                 TextButton.icon(
                   onPressed: () => movement.showConatctDialog(
-                      context,
-                      const Color(0xFFEDDCD2),
-                      Colors.black,
-                      const Color.fromARGB(255, 231, 205, 190)),
+                      context, bgColor, Colors.black, bgColor),
                   label: Text(
                     'Contact Me',
                     style: getTextStyle(),
@@ -112,10 +92,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   icon: getIconStyle(Icons.person_rounded),
                   style: getButtonStyle(),
                 ),
-                // const SizedBox(width: 20, height: 70),
+
                 TextButton.icon(
                   onPressed: () => movement.showAboutMeDialog(
-                      context, getTextStyle(), buttonsBg.withOpacity(1)),
+                    context,
+                    getTextStyle(color: Colors.white),
+                    buttonsBg.withOpacity(1),
+                  ),
                   label: Text(
                     'About Me',
                     style: getTextStyle(),
@@ -125,6 +108,64 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ),
               ],
             ),
+          ),
+        ),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          color: bgColor,
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: bgColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade500,
+                      offset: const Offset(4, 4),
+                      blurRadius: 15,
+                      spreadRadius: 1,
+                    ),
+                    const BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-4, -4),
+                      blurRadius: 15,
+                      spreadRadius: 1,
+                    )
+                  ],
+                ),
+                child: TextButton(
+                  onPressed: () =>
+                      movement.goDown(context, const SquareoPage()),
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    overlayColor:
+                        const WidgetStatePropertyAll(Colors.transparent),
+                    splashFactory: InkSparkle.splashFactory,
+                  ),
+                  child: Text(
+                    'My Work',
+                    style: getTextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Text(
+                'Yahya Amarneh',
+                style: getTextStyle(fontSize: 23, color: titleColor),
+              ),
+            ],
           ),
         ),
         bottomSheet: IconButton(

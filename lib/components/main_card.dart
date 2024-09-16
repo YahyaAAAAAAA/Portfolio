@@ -95,7 +95,7 @@ class MainCard extends StatelessWidget {
                       textStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         fontFamily: 'Abel',
                       ),
                       colors: animatedText,
@@ -216,7 +216,7 @@ class MainCard extends StatelessWidget {
                   style: TextStyle(
                     color: animatedText[0],
                     fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     fontFamily: 'Abel',
                   ),
                 )),
