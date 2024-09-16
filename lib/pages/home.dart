@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   Movement movement = Movement();
   Color buttonsBg = Colors.grey.withOpacity(0.5);
-  Color bgColor = Colors.grey.shade300;
+  Color bgColor = const Color(0xFFE0E0E0);
   Color titleColor = Colors.grey.shade700;
 
   TextStyle getTextStyle({Color color = Colors.black, double fontSize = 20}) {
@@ -124,14 +124,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: bgColor,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
-                      color: Colors.grey.shade500,
-                      offset: const Offset(4, 4),
+                      color: Color(0xFF9E9E9E),
+                      offset: Offset(4, 4),
                       blurRadius: 15,
                       spreadRadius: 1,
                     ),
-                    const BoxShadow(
+                    BoxShadow(
                       color: Colors.white,
                       offset: Offset(-4, -4),
                       blurRadius: 15,
